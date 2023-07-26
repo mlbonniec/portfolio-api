@@ -26,6 +26,14 @@ export abstract class EnvironmentHelper {
   }
 
   /**
+   * Get the mongo uri from the environment variables.
+   * @returns The mongo uri from the environment variables as a string.
+   */
+  static getMongoUri(): string {
+    return process.env.MONGO_URI;
+  }
+
+  /**
    * Get the environment from the environment variables.
    * @returns The environment from the environment variables as an Environment.
    */
