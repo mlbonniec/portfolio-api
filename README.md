@@ -37,3 +37,7 @@ $ npm run start:prod
 
 - Author - [Mathis LE BONNIEC](https://github.com/mlbonniec)
 - Website - [https://mathislebonniec.fr](https://mathislebonniec.fr)
+
+## License
+This project is licensed under the CC BY-NC-ND 4.0 - see the [LICENSE](./LICENSE) file for details.
+
