@@ -4,7 +4,7 @@
   "description": "The API for Mathis LE BONNIEC porfolio",
   "author": "Mathis LE BONNIEC",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "CC BY-NC-ND 4.0",
   "scripts": {
     "build": "nest build",
     "start": "nest start",
