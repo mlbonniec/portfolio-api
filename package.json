@@ -1,7 +1,7 @@
 {
   "name": "portfolio-api",
   "version": "0.0.1",
-  "description": "The API for Mathis LE BONNIEC porfolio",
+  "description": "The API for my personal portfolio.",
   "author": "Mathis LE BONNIEC",
   "private": true,
   "license": "CC BY-NC-ND 4.0",
