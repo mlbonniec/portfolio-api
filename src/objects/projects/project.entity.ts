@@ -5,11 +5,59 @@ import { ApiProperty } from '@nestjs/swagger';
 
 @Entity({ collection: 'projects', customRepository: () => GlobalRepository })
 export class ProjectEntity {
-  @ApiProperty({ description: 'The id of the project', name: 'id', type: 'string' })
+  @ApiProperty({ description: 'The id of the project.', name: 'id', type: 'string' })
   @PrimaryKey()
   readonly _id: ObjectId;
 
-  @ApiProperty({ description: 'The name of the project' })
+  @ApiProperty({ description: 'The slug of the project.' })
+  @Property({ unique: true })
+  slug: string;
+
+  @ApiProperty({ description: 'The name of the project.' })
   @Property()
   name: string;
+
+  @ApiProperty({ description: 'The description of the project.' })
+  @Property()
+  description: string;
+
+  @ApiProperty({ description: 'Describe if the project is visible.' })
+  @Property()
+  visible: boolean;
+
+  @ApiProperty({ description: 'The preview of the project.' })
+  @Property()
+  preview: string;
+
+  @ApiProperty({ description: 'The content of the project.' })
+  @Property()
+  content: string;
+
+  @ApiProperty({ description: 'Describe if the project is still maintained.' })
+  @Property()
+  maintained: boolean;
+
+  @ApiProperty({ description: 'The release date of the project.' })
+  @Property()
+  release: Date;
+
+  @ApiProperty({ description: 'The tags of the project.' })
+  @Property()
+  tags: string[];
+
+  @ApiProperty({ description: 'The technologies used in the project.' })
+  @Property()
+  technologies: string[];
+
+  @ApiProperty({ description: 'The url of the project.' })
+  @Property({ nullable: true })
+  url: string;
+
+  @ApiProperty({ description: 'The cover of the project.' })
+  @Property()
+  cover: string;
+
+  @ApiProperty({ description: 'The images of the project.' })
+  @Property()
+  images: string[];
 }
