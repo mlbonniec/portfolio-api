@@ -4,6 +4,7 @@ import { InjectRepository } from '@mikro-orm/nestjs';
 import { GlobalRepository } from '@/repositories/global.repository';
 import { CreateProjectDto } from '@objects/projects/project.dto';
 import { Exceptions } from '@helpers/exceptions';
+import { ObjectId } from '@mikro-orm/mongodb';
 
 @Injectable()
 export class ProjectsService {
@@ -12,11 +13,31 @@ export class ProjectsService {
   ) {}
 
   /**
-   * Get all the projects.
+   * Get all the visible projects.
+   * @remarks Project with visible = false are not returned.
    * @returns {Promise<ProjectEntity[]>} The projects found.
    */
   async getAllProjects(): Promise<ProjectEntity[]> {
-    return this.projectsRepository.findAll();
+    return this.projectsRepository.find({
+      visible: true
+    });
+  }
+
+  /**
+   * Get a project by its id.
+   * @remarks Project with visible = false are not returned.
+   * @param {string} id The id of the project to find.
+   * @returns {Promise<ProjectEntity>} The project found.
+   */
+  async getById(id: string): Promise<ProjectEntity> {
+    try {
+      return await this.projectsRepository.findOneOrFail({
+        _id: ObjectId.createFromHexString(id),
+        visible: true
+      });
+    } catch (err: unknown) {
+      Exceptions.NOT_FOUND.throw();
+    }
   }
 
   /**
