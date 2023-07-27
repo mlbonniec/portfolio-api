@@ -13,7 +13,7 @@ export class ProjectsController {
   @ApiOperation({ summary: 'Get all the projects.' })
   @ApiOkResponse({ type: ProjectEntity, isArray: true, description: 'Projects found.' })
   @Get()
-  getAllProjects(): Promise<ProjectEntity[]> {
+  async getAllProjects(): Promise<ProjectEntity[]> {
     return this.projectsService.getAllProjects();
   }
 
