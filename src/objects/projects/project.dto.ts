@@ -3,8 +3,10 @@ import {
   IsAlphanumeric,
   IsBoolean,
   IsDateString,
-  IsLowercase, IsMongoId,
-  IsNotEmpty, IsOptional,
+  IsLowercase,
+  IsMongoId,
+  IsNotEmpty,
+  IsOptional,
   IsString,
   IsUrl,
   Length
