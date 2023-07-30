@@ -1,4 +1,4 @@
-import { ProjectEntity } from '@objects/projects/project.entity';
+import { ProjectEntity, ProjectImage } from '@objects/projects/project.entity';
 import {
   IsAlphanumeric,
   IsBoolean,
@@ -8,8 +8,10 @@ import {
   IsOptional,
   IsString,
   IsUrl,
-  Length
+  Length,
+  ValidateNested
 } from 'class-validator';
+import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 
 class ProjectByIdDto {
@@ -18,7 +20,17 @@ class ProjectByIdDto {
   id: string;
 }
 
-export class CreateProjectDto implements Omit<ProjectEntity, '_id'> {
+class CreateProjectImageDto implements ProjectImage {
+  @ApiProperty({ description: 'The image url.' })
+  @IsUrl()
+  url: string;
+
+  @ApiProperty({ description: 'The image caption.' })
+  @IsString()
+  caption: string;
+}
+
+export class CreateProjectDto implements Omit<ProjectEntity, '_id' | 'images'> {
   @ApiProperty({ description: 'Project slug.' })
   @IsString()
   @IsLowercase()
@@ -75,8 +87,9 @@ export class CreateProjectDto implements Omit<ProjectEntity, '_id'> {
   cover: string;
 
   @ApiProperty({ description: 'Project images.' })
-  @IsUrl({}, { each: true })
-  images: string[];
+  @ValidateNested({ each: true })
+  @Type(() => CreateProjectImageDto)
+  images: CreateProjectImageDto[];
 }
 
 export class GetProjectByIdDto extends ProjectByIdDto {}
