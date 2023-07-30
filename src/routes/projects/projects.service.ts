@@ -18,9 +18,11 @@ export class ProjectsService {
    * @returns {Promise<ProjectEntity[]>} The projects found.
    */
   async getAllProjects(): Promise<ProjectEntity[]> {
-    return this.projectsRepository.find({
+    const projects: ProjectEntity[] = await this.projectsRepository.find({
       visible: true
     });
+
+    return projects.sort((lhs, rhs) => rhs.release.getTime() - lhs.release.getTime());
   }
 
   /**
@@ -29,6 +31,7 @@ export class ProjectsService {
    * @param {string} id The id of the project to find.
    * @returns {Promise<ProjectEntity>} The project found.
    */
+
   async getById(id: string): Promise<ProjectEntity> {
     try {
       return await this.projectsRepository.findOneOrFail({
