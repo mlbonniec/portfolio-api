@@ -80,6 +80,7 @@ export abstract class Exceptions {
   public static readonly BAD_REQUEST: Exception = new Exception('Bad request', 'Invalid or missing request parameters.', HttpStatus.BAD_REQUEST);
   public static readonly UNAUTHORIZED: Exception = new Exception('Unauthorized', 'You\'re not authorized to access this resource.', HttpStatus.UNAUTHORIZED);
   public static readonly NOT_FOUND: Exception = new Exception('Not found', 'The resource you\'re trying to access may not exists.', HttpStatus.NOT_FOUND);
+  public static readonly CONFLICT: Exception = new Exception('Conflict', 'The resource you\'re trying to create already exists.', HttpStatus.CONFLICT);
 
   // 5xx
   public static readonly INTERNAL_SERVER_ERROR: Exception = new Exception('Internal server error', 'An internal server error has occurred.', HttpStatus.INTERNAL_SERVER_ERROR);
