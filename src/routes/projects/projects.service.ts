@@ -53,6 +53,14 @@ export class ProjectsService {
    * @returns {Promise<ProjectEntity>} The project created.
    */
   async create(projectDto: CreateProjectDto): Promise<ProjectEntity> {
+
+    const existingProject: ProjectEntity | null = await this.projectsRepository.findOne({ slug: projectDto.slug }, {
+      fields: []
+    });
+
+    if (existingProject)
+      Exceptions.CONFLICT.throw();
+
     const project: ProjectEntity = this.projectsRepository.create<ProjectEntity>(projectDto);
 
     try {
