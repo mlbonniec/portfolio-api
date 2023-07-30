@@ -21,6 +21,7 @@ import { customOptions, documentBuilder } from '@config/swagger.config';
       break;
   }
 
+  app.enableCors();
   app.useGlobalPipes(new ValidationPipe(validationPipeConfig));
 
   await app.listen(EnvironmentHelper.getPort());
