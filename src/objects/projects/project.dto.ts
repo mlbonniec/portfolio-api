@@ -4,7 +4,6 @@ import {
   IsBoolean,
   IsDateString,
   IsLowercase,
-  IsMongoId,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -14,7 +13,8 @@ import {
 import { ApiProperty } from '@nestjs/swagger';
 
 class ProjectByIdDto {
-  @IsMongoId()
+  @IsString()
+  @IsNotEmpty()
   id: string;
 }
 

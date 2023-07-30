@@ -32,8 +32,11 @@ export class ProjectsService {
   async getById(id: string): Promise<ProjectEntity> {
     try {
       return await this.projectsRepository.findOneOrFail({
-        _id: ObjectId.createFromHexString(id),
-        visible: true
+        visible: true,
+        $or: [
+          { slug: id },
+          { _id: ObjectId.isValid(id) ? new ObjectId(id) : null },
+        ]
       });
     } catch (err: unknown) {
       Exceptions.NOT_FOUND.throw();
