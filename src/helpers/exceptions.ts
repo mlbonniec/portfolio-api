@@ -61,11 +61,52 @@ class Exception {
       description: this.description,
       status: this.status,
       ...(showValidationErrors && {
-        validation: errors.flatMap(e => Object.values(e.constraints))
+        validation: this.flattenValidationErrors(errors)
       })
     });
 
     throw new HttpException(body, this.status);
+  }
+
+  /**
+   * Flattens the validation errors including the children.
+   * @url https://github.com/nestjs/nest/blob/2b1b63a/packages/common/pipes/validation.pipe.ts#L246-L294
+   * @param {ValidationError[]} validationErrors The validation errors.
+   * @returns {string[]} The validation errors.
+   */
+  private flattenValidationErrors(validationErrors: ValidationError[]): string[] {
+    return validationErrors
+      .map(error => this.mapChildrenToValidationErrors(error))
+      .flat()
+      .filter(item => !!item.constraints)
+      .map(item => Object.values(item.constraints))
+      .flat()
+  }
+
+  private mapChildrenToValidationErrors(error: ValidationError, parentPath?: string): ValidationError[] {
+    if (!(error.children && error.children.length))
+      return [error];
+
+    parentPath = parentPath ? `${parentPath}.${error.property}` : error.property;
+    const validationErrors: ValidationError[] = [];
+    error.children?.forEach(item => {
+      if (item.children && item.children.length)
+        validationErrors.push(...this.mapChildrenToValidationErrors(item, parentPath),);
+      validationErrors.push(this.prependConstraintsWithParentProp(parentPath, item),);
+    });
+    return validationErrors;
+  }
+
+  private prependConstraintsWithParentProp(parentPath: string, error: ValidationError): ValidationError {
+    const constraints: Record<string, string> = {};
+
+    for (const key in error.constraints)
+      constraints[key] = `${parentPath}.${error.constraints[key]}`;
+
+    return {
+      ...error,
+      constraints,
+    };
   }
 }
 
