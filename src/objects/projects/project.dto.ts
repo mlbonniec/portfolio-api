@@ -1,9 +1,7 @@
 import { ProjectEntity, ProjectImage } from '@objects/projects/project.entity';
 import {
-  IsAlphanumeric,
   IsBoolean,
   IsDateString,
-  IsLowercase,
   IsNotEmpty,
   IsOptional,
   IsString,
@@ -13,6 +11,7 @@ import {
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
+import { IsSlug } from '@decorators/is-slug';
 
 class ProjectByIdDto {
   @IsString()
@@ -32,9 +31,7 @@ class CreateProjectImageDto implements ProjectImage {
 
 export class CreateProjectDto implements Omit<ProjectEntity, '_id' | 'images'> {
   @ApiProperty({ description: 'Project slug.' })
-  @IsString()
-  @IsLowercase()
-  @IsAlphanumeric('en-US')
+  @IsSlug()
   slug: string;
 
   @ApiProperty({ description: 'Project name.' })
