@@ -1,7 +1,18 @@
-import { Entity, PrimaryKey, Property } from '@mikro-orm/core';
+import { Embeddable, Embedded, Entity, PrimaryKey, Property } from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
 import { GlobalRepository } from '@/repositories/global.repository';
 import { ApiProperty } from '@nestjs/swagger';
+
+@Embeddable()
+export class ProjectImage {
+  @ApiProperty({ description: 'The image url.' })
+  @Property()
+  url: string;
+
+  @ApiProperty({ description: 'The image caption.' })
+  @Property()
+  caption: string;
+}
 
 @Entity({ collection: 'projects', customRepository: () => GlobalRepository })
 export class ProjectEntity {
@@ -58,6 +69,6 @@ export class ProjectEntity {
   cover: string;
 
   @ApiProperty({ description: 'The images of the project.' })
-  @Property()
-  images: string[];
+  @Embedded(() => ProjectImage, { array: true })
+  images: ProjectImage[];
 }
