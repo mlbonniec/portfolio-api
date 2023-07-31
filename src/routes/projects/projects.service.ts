@@ -22,7 +22,7 @@ export class ProjectsService {
       visible: true
     });
 
-    return projects.sort((lhs, rhs) => rhs.release.getTime() - lhs.release.getTime());
+    return projects.sort((lhs, rhs) => rhs.date.getTime() - lhs.date.getTime());
   }
 
   /**

@@ -48,9 +48,9 @@ export class ProjectEntity {
   @Property()
   maintained: boolean;
 
-  @ApiProperty({ description: 'The release date of the project.' })
+  @ApiProperty({ description: 'The date of the project.' })
   @Property()
-  release: Date;
+  date: Date;
 
   @ApiProperty({ description: 'The tags of the project.' })
   @Property()

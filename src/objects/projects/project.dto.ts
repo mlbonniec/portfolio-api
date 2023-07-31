@@ -62,9 +62,9 @@ export class CreateProjectDto implements Omit<ProjectEntity, '_id' | 'images'> {
   @IsBoolean()
   maintained: boolean;
 
-  @ApiProperty({ description: 'Project release date.' })
+  @ApiProperty({ description: 'Project date.' })
   @IsDateString()
-  release: Date;
+  date: Date;
 
   @ApiProperty({ description: 'Project tags.' })
   @IsString({ each: true })
