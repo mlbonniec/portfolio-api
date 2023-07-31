@@ -6,7 +6,7 @@ import { DocumentationTags } from '@config/swagger.config';
 import { CreateProjectDto, GetProjectByIdDto } from '@objects/projects/project.dto';
 
 @ApiTags(DocumentationTags.PROJECTS)
-@Controller({ path: 'projects', version: '1' })
+@Controller({ path: 'projects', version: '2' })
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
