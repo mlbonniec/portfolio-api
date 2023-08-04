@@ -1,4 +1,4 @@
-import { IsEnum, IsNumberString, IsString } from 'class-validator';
+import { IsBooleanString, IsEnum, IsNumberString, IsString } from 'class-validator';
 
 export enum Environment {
   DEVELOPMENT = 'development',
@@ -16,4 +16,7 @@ export class EnvironmentVariables {
   @IsString()
   @IsString()
   MONGO_URI: string;
+
+  @IsBooleanString()
+  ALLOW_PROJECTS_CREATION: string;
 }
