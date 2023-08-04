@@ -11,19 +11,19 @@ import { customOptions, documentBuilder } from '@config/swagger.config';
 
 (async function (): Promise<void> {
   const app: INestApplication = await NestFactory.create(AppModule);
-  const document: OpenAPIObject = SwaggerModule.createDocument(app, documentBuilder);
+
+  app.enableVersioning();
+  app.enableCors();
+  app.useGlobalPipes(new ValidationPipe(validationPipeConfig));
 
   switch (EnvironmentHelper.getEnvironment()) {
     case Environment.DEVELOPMENT:
+      const document: OpenAPIObject = SwaggerModule.createDocument(app, documentBuilder);
       SwaggerModule.setup('docs', app, document, customOptions);
       break;
     default:
       break;
   }
-
-  app.enableVersioning();
-  app.enableCors();
-  app.useGlobalPipes(new ValidationPipe(validationPipeConfig));
 
   await app.listen(EnvironmentHelper.getPort());
 })();
