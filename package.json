@@ -2,7 +2,11 @@
   "name": "portfolio-api",
   "version": "2.1.1",
   "description": "The API for my personal portfolio.",
-  "author": "Mathis LE BONNIEC",
+  "author": {
+    "email": "mathislbonniec@gmail.com",
+    "name": "Mathis Le Bonniec",
+    "url": "https://github.com/mlbonniec"
+  },
   "private": true,
   "license": "CC BY-NC-ND 4.0",
   "scripts": {

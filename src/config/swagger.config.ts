@@ -1,5 +1,6 @@
 import { DocumentBuilder, OpenAPIObject, SwaggerCustomOptions } from '@nestjs/swagger';
 import { SwaggerTheme, SwaggerThemeNameEnum } from 'swagger-themes';
+import { author, description, version } from '../../package.json';
 
 export enum DocumentationTags {
   INFORMATIONS = 'Informations',
@@ -8,11 +9,12 @@ export enum DocumentationTags {
 
 export const documentBuilder: Omit<OpenAPIObject, 'paths'> = new DocumentBuilder()
   .setTitle('Mathis LE BONNIEC - Portfolio API')
-  .setDescription('The API for Mathis LE BONNIEC porfolio.')
-  .setVersion('1.0')
+  .setDescription(description)
+  .setVersion(version)
+  .addBasicAuth()
   .addTag(DocumentationTags.INFORMATIONS, 'Get the API informations.')
   .addTag(DocumentationTags.PROJECTS, 'Manages all the projects of the application.')
-  .setContact('Mathis LE BONNIEC', 'https://github.com/mlbonniec', 'mathislbonniec@gmail.com')
+  .setContact(author.name, author.url, author.email)
   .build();
 
 export const customOptions: SwaggerCustomOptions = {
