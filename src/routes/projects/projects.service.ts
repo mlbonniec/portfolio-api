@@ -60,10 +60,10 @@ export class ProjectsService {
     if (existingProject)
       Exceptions.CONFLICT.throw();
 
-    const project: ProjectEntity = this.projectsRepository.create<ProjectEntity>(projectDto);
+    const project: ProjectEntity = this.projectsRepository.create(projectDto);
 
     try {
-      await this.projectsRepository.insert(project);
+      await this.projectsRepository.add(project);
     } catch (error) {
       Exceptions.INTERNAL_SERVER_ERROR.throw();
     }

@@ -1,5 +1,5 @@
 import { DocumentBuilder, OpenAPIObject, SwaggerCustomOptions } from '@nestjs/swagger';
-import { SwaggerTheme } from 'swagger-themes';
+import { SwaggerTheme, SwaggerThemeNameEnum } from 'swagger-themes';
 
 export enum DocumentationTags {
   INFORMATIONS = 'Informations',
@@ -19,7 +19,7 @@ export const customOptions: SwaggerCustomOptions = {
   customSiteTitle: 'Mathis LE BONNIEC - API Documentation',
   customCss: `
   @media (prefers-color-scheme: dark) {
-    ${new SwaggerTheme('v3').getBuffer('dark')}
+    ${new SwaggerTheme().getBuffer(SwaggerThemeNameEnum.DARK)}
   }
   `
 }

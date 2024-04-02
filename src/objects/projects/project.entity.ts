@@ -14,7 +14,7 @@ export class ProjectImage {
   caption: string;
 }
 
-@Entity({ collection: 'projects', customRepository: () => GlobalRepository })
+@Entity({ collection: 'projects', repository: () => GlobalRepository })
 export class ProjectEntity {
   @ApiProperty({ description: 'The id of the project.', name: 'id', type: 'string' })
   @PrimaryKey()

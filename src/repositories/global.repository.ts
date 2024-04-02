@@ -3,11 +3,11 @@ import { EntityRepository } from '@mikro-orm/mongodb';
 
 export class GlobalRepository<T extends object> extends EntityRepository<T> {
   /**
-   * Insert an entity in the database
-   * @param {object} entity The entity to insert
-   * @returns {Promise<Primary<object>>} The inserted entity
+   * Add an entity in the database
+   * @param {object} entity The entity to add
+   * @returns {Promise<Primary<object>>} The added entity
    */
-  async insert(entity: T): Promise<Primary<T>> {
+  async add(entity: T): Promise<Primary<T>> {
     return await this.em.insert<T>(entity);
   }
 
