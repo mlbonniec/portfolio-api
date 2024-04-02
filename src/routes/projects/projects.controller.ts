@@ -1,9 +1,10 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ProjectsService } from '@routes/projects/projects.service';
 import { ProjectEntity } from '@objects/projects/project.entity';
 import { ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { DocumentationTags } from '@config/swagger.config';
 import { CreateProjectDto, GetProjectByIdDto } from '@objects/projects/project.dto';
+import { AuthorizationGuard } from '@guards/authorization.guard';
 
 @ApiTags(DocumentationTags.PROJECTS)
 @Controller({ path: 'projects', version: '2' })
@@ -27,6 +28,7 @@ export class ProjectsController {
 
   @ApiOperation({ summary: 'Create a project.' })
   @ApiOkResponse({ type: ProjectEntity, description: 'Project created.' })
+  @UseGuards(AuthorizationGuard)
   @Post()
   async create(@Body() body: CreateProjectDto): Promise<ProjectEntity> {
     return this.projectsService.create(body);

@@ -17,7 +17,8 @@ Firstly, you need to create a .env file at the root of the project and fill it w
 ```dotenv
 NODE_ENV=[development,production]
 PORT=YOUR_PORT
-MONGO_URI=YOU_MONGO_URI
+MONGO_URI=YOUR_MONGO_URI
+ALLOW_PROJECTS_CREATION=[true,false]
 ```
 
 ### Commands

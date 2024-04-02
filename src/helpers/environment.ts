@@ -34,6 +34,14 @@ export abstract class EnvironmentHelper {
   }
 
   /**
+   * Get the boolean describing if projects can be created from the environment variables.
+   * @returns The boolean describing if projects can be created from the environment variables as a boolean.
+   */
+  static allowProjectsCreation(): boolean {
+    return JSON.parse(process.env.ALLOW_PROJECTS_CREATION) ?? false;
+  }
+
+  /**
    * Get the environment from the environment variables.
    * @returns The environment from the environment variables as an Environment.
    */
