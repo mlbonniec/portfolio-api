@@ -6,6 +6,9 @@ The API for my porfolio to store my projects.
 $ npm install
 ```
 
+## Documentation
+When running the app, you can access a detailed Swagger documentation at the `/docs` route.
+
 ## Running the app
 
 ### Environment variables
