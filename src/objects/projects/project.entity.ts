@@ -60,7 +60,7 @@ export class ProjectEntity {
   @Property()
   technologies: string[];
 
-  @ApiProperty({ description: 'The url of the project.' })
+  @ApiProperty({ description: 'The url of the project.', nullable: true })
   @Property({ nullable: true })
   url: string;
 
@@ -68,7 +68,7 @@ export class ProjectEntity {
   @Property()
   cover: string;
 
-  @ApiProperty({ description: 'The images of the project.' })
+  @ApiProperty({ description: 'The images of the project.', type: ProjectImage, isArray: true })
   @Embedded(() => ProjectImage, { array: true })
   images: ProjectImage[];
 }
