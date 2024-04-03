@@ -1,7 +1,7 @@
 import { Embeddable, Embedded, Entity, PrimaryKey, Property } from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
 import { GlobalRepository } from '@/repositories/global.repository';
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 
 @Embeddable()
 export class ProjectImage {
@@ -72,3 +72,9 @@ export class ProjectEntity {
   @Embedded(() => ProjectImage, { array: true })
   images: ProjectImage[];
 }
+
+/**
+ * @description The keys of the project entity that are used in the short project entity.
+ */
+export const shortProjectKeys: (keyof ProjectEntity)[] = ['slug', 'name', 'description', 'preview', 'date', 'cover', 'maintained'];
+export class ShortProjectEntity extends PickType(ProjectEntity, shortProjectKeys) {}
