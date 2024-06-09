@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { ProjectEntity } from '@objects/projects/project.entity';
+import { ProjectEntity, ShortProjectEntity, shortProjectKeys } from '@objects/projects/project.entity';
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { GlobalRepository } from '@/repositories/global.repository';
 import { CreateProjectDto } from '@objects/projects/project.dto';
@@ -16,13 +16,14 @@ export class ProjectsService {
   /**
    * Get all the visible projects.
    * @remarks Project with visible = false are not returned.
-   * @returns {Promise<ProjectEntity[]>} The projects found.
+   * @returns {Promise<ShortProjectEntity[]>} The projects found as short entities.
    */
-  async getAllProjects(): Promise<ProjectEntity[]> {
-    const projects: ProjectEntity[] = await this.projectsRepository.find({
+  async getAllProjects(): Promise<ShortProjectEntity[]> {
+    const projects: ShortProjectEntity[] = await this.projectsRepository.find({
       visible: true
     }, {
-      orderBy: { order: 'asc' }
+      orderBy: { order: 'asc' },
+      fields: shortProjectKeys
     });
 
     return projects;

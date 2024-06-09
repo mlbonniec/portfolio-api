@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { ProjectsService } from '@routes/projects/projects.service';
-import { ProjectEntity } from '@objects/projects/project.entity';
+import { ProjectEntity, ShortProjectEntity } from '@objects/projects/project.entity';
 import { ApiBasicAuth, ApiNotFoundResponse, ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { DocumentationTags } from '@config/swagger.config';
 import { CreateProjectDto, GetProjectByIdDto } from '@objects/projects/project.dto';
@@ -12,9 +12,9 @@ export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
   @ApiOperation({ summary: 'Get all the projects.' })
-  @ApiOkResponse({ type: ProjectEntity, isArray: true, description: 'Projects found.' })
+  @ApiOkResponse({ type: ShortProjectEntity, isArray: true, description: 'Projects found.' })
   @Get()
-  async getAllProjects(): Promise<ProjectEntity[]> {
+  async getAllProjects(): Promise<ShortProjectEntity[]> {
     return this.projectsService.getAllProjects();
   }
 
