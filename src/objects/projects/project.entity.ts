@@ -71,4 +71,8 @@ export class ProjectEntity {
   @ApiProperty({ description: 'The images of the project.' })
   @Embedded(() => ProjectImage, { array: true })
   images: ProjectImage[];
+
+  @ApiProperty({ description: 'The project order in the list.' })
+  @Property()
+  order: number;
 }

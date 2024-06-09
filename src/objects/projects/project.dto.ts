@@ -3,6 +3,7 @@ import {
   IsBoolean,
   IsDateString,
   IsNotEmpty,
+  IsNumber,
   IsOptional,
   IsString,
   IsUrl,
@@ -87,6 +88,10 @@ export class CreateProjectDto implements Omit<ProjectEntity, '_id' | 'images'> {
   @ValidateNested({ each: true })
   @Type(() => CreateProjectImageDto)
   images: CreateProjectImageDto[];
+
+  @ApiProperty({ description: 'Project order.' })
+  @IsNumber()
+  order: number;
 }
 
 export class GetProjectByIdDto extends ProjectByIdDto {}

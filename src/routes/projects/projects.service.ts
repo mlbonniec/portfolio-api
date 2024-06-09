@@ -9,7 +9,8 @@ import { ObjectId } from '@mikro-orm/mongodb';
 @Injectable()
 export class ProjectsService {
   constructor(
-    @InjectRepository(ProjectEntity.name) private readonly projectsRepository: GlobalRepository<ProjectEntity>
+    @InjectRepository(ProjectEntity.name)
+    private readonly projectsRepository: GlobalRepository<ProjectEntity>
   ) {}
 
   /**
@@ -20,9 +21,11 @@ export class ProjectsService {
   async getAllProjects(): Promise<ProjectEntity[]> {
     const projects: ProjectEntity[] = await this.projectsRepository.find({
       visible: true
+    }, {
+      orderBy: { order: 'asc' }
     });
 
-    return projects.sort((lhs, rhs) => rhs.date.getTime() - lhs.date.getTime());
+    return projects;
   }
 
   /**
